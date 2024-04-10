@@ -1,0 +1,7 @@
+C:\Users\santi\OneDrive\Escritorio\Supermarket-mvp\Supermarket-mvp\obj\Debug\net8.0-windows\Supermarket-mvp.csproj.GenerateResource.cache
+C:\Users\santi\OneDrive\Escritorio\Supermarket-mvp\Supermarket-mvp\obj\Debug\net8.0-windows\Supermarket_mvp.Properties.Resources.resources
+C:\Users\santi\OneDrive\Escritorio\Supermarket-mvp\Supermarket-mvp\obj\Debug\net8.0-windows\Supermarket-mvp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\santi\OneDrive\Escritorio\Supermarket-mvp\Supermarket-mvp\obj\Debug\net8.0-windows\Supermarket-mvp.AssemblyInfoInputs.cache
+C:\Users\santi\OneDrive\Escritorio\Supermarket-mvp\Supermarket-mvp\obj\Debug\net8.0-windows\Supermarket-mvp.AssemblyInfo.cs
+C:\Users\santi\OneDrive\Escritorio\Supermarket-mvp\Supermarket-mvp\obj\Debug\net8.0-windows\Supermarket-mvp.csproj.CoreCompileInputs.cache
+C:\Users\santi\OneDrive\Escritorio\Supermarket-mvp\Supermarket-mvp\obj\Debug\net8.0-windows\Supermarket-mvp.sourcelink.json
