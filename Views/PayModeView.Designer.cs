@@ -36,10 +36,17 @@
             tabPagePayModeDetail = new TabPage();
             label2 = new Label();
             TxtSearch = new TextBox();
+            BtnSearch = new Button();
+            DgPayMode = new DataGridView();
+            BtnNew = new Button();
+            BtnEdit = new Button();
+            BtnDelete = new Button();
+            BtnClose = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabControl1.SuspendLayout();
             tabPagePayModeList.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DgPayMode).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -86,6 +93,12 @@
             // 
             // tabPagePayModeList
             // 
+            tabPagePayModeList.Controls.Add(BtnClose);
+            tabPagePayModeList.Controls.Add(BtnDelete);
+            tabPagePayModeList.Controls.Add(BtnEdit);
+            tabPagePayModeList.Controls.Add(BtnNew);
+            tabPagePayModeList.Controls.Add(DgPayMode);
+            tabPagePayModeList.Controls.Add(BtnSearch);
             tabPagePayModeList.Controls.Add(TxtSearch);
             tabPagePayModeList.Controls.Add(label2);
             tabPagePayModeList.Location = new Point(4, 24);
@@ -119,8 +132,65 @@
             // 
             TxtSearch.Location = new Point(22, 33);
             TxtSearch.Name = "TxtSearch";
-            TxtSearch.Size = new Size(348, 23);
+            TxtSearch.PlaceholderText = "Data to search";
+            TxtSearch.Size = new Size(417, 23);
             TxtSearch.TabIndex = 1;
+            // 
+            // BtnSearch
+            // 
+            BtnSearch.Image = Properties.Resources.search_small;
+            BtnSearch.Location = new Point(445, 23);
+            BtnSearch.Name = "BtnSearch";
+            BtnSearch.Size = new Size(41, 41);
+            BtnSearch.TabIndex = 2;
+            BtnSearch.UseVisualStyleBackColor = true;
+            // 
+            // DgPayMode
+            // 
+            DgPayMode.AllowUserToAddRows = false;
+            DgPayMode.AllowUserToDeleteRows = false;
+            DgPayMode.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DgPayMode.Location = new Point(22, 70);
+            DgPayMode.Name = "DgPayMode";
+            DgPayMode.ReadOnly = true;
+            DgPayMode.Size = new Size(464, 208);
+            DgPayMode.TabIndex = 3;
+            // 
+            // BtnNew
+            // 
+            BtnNew.Location = new Point(492, 88);
+            BtnNew.Name = "BtnNew";
+            BtnNew.Size = new Size(132, 35);
+            BtnNew.TabIndex = 4;
+            BtnNew.Text = "button1";
+            BtnNew.UseVisualStyleBackColor = true;
+            // 
+            // BtnEdit
+            // 
+            BtnEdit.Location = new Point(492, 138);
+            BtnEdit.Name = "BtnEdit";
+            BtnEdit.Size = new Size(132, 35);
+            BtnEdit.TabIndex = 5;
+            BtnEdit.Text = "button2";
+            BtnEdit.UseVisualStyleBackColor = true;
+            // 
+            // BtnDelete
+            // 
+            BtnDelete.Location = new Point(492, 179);
+            BtnDelete.Name = "BtnDelete";
+            BtnDelete.Size = new Size(132, 35);
+            BtnDelete.TabIndex = 6;
+            BtnDelete.Text = "button3";
+            BtnDelete.UseVisualStyleBackColor = true;
+            // 
+            // BtnClose
+            // 
+            BtnClose.Location = new Point(492, 220);
+            BtnClose.Name = "BtnClose";
+            BtnClose.Size = new Size(132, 35);
+            BtnClose.TabIndex = 7;
+            BtnClose.Text = "button4";
+            BtnClose.UseVisualStyleBackColor = true;
             // 
             // PayModeView
             // 
@@ -137,6 +207,7 @@
             tabControl1.ResumeLayout(false);
             tabPagePayModeList.ResumeLayout(false);
             tabPagePayModeList.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)DgPayMode).EndInit();
             ResumeLayout(false);
         }
 
@@ -150,5 +221,11 @@
         private TabPage tabPagePayModeDetail;
         private TextBox TxtSearch;
         private Label label2;
+        private Button BtnSearch;
+        private DataGridView DgPayMode;
+        private Button BtnClose;
+        private Button BtnDelete;
+        private Button BtnEdit;
+        private Button BtnNew;
     }
 }
