@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Supermarket_mvp.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -86,6 +87,28 @@ namespace Supermarket_mvp.Views
             DgPayMode.DataSource = payModeList;
         }
 
+        //Patron singleton para controlar solo una instancia del formulario 
+        private static PayModeView instance;
+
+        public static PayModeView GetInstance() 
+        {
+            if (instance == null || instance.IsDisposed)
+            {
+                instance = new PayModeView();
+            }
+            else 
+            {
+                if (instance.WindowState == FormWindowState.Minimized) 
+                {
+                instance.WindowState = FormWindowState.Normal;
+                }
+                instance.BringToFront();
+            }
+            return instance;
+        }
+        
+        
+        
         private void label3_Click(object sender, EventArgs e)
         {
 

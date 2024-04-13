@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            pictureBox1 = new PictureBox();
             BtnPayMode = new Button();
+            pictureBox1 = new PictureBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -45,16 +45,6 @@
             panel1.Size = new Size(158, 450);
             panel1.TabIndex = 0;
             // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources.sell;
-            pictureBox1.Location = new Point(3, 3);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(155, 50);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            // 
             // BtnPayMode
             // 
             BtnPayMode.BackgroundImage = Properties.Resources.buy;
@@ -65,6 +55,16 @@
             BtnPayMode.TabIndex = 1;
             BtnPayMode.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.sell;
+            pictureBox1.Location = new Point(3, 3);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(155, 50);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
             // MainView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -73,6 +73,7 @@
             Controls.Add(panel1);
             Name = "MainView";
             Text = "Supermarket";
+            WindowState = FormWindowState.Maximized;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
