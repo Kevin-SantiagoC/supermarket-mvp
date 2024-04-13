@@ -28,5 +28,6 @@ namespace Supermarket_mvp.Presenters
             IPayModeRepository repository = new  PayModeRepository(sqlConnectionString);
             new PayModePresenter(view, repository);
         }
+       
     }
 }
