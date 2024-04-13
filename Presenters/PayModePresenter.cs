@@ -49,7 +49,36 @@ namespace Supermarket_mvp.Presenters
 
         private void SavePayMode(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            //Se crea un objeto de la clase PayModeModel y se asigno los datos
+            // de las caja de texto de la vista 
+            var payMode =new PayModeModel();
+            payMode.Id = Convert.ToInt32(view.PayModeId);
+            payMode.Name = view.PayModeName;
+            payMode.Observation = view.PayModeObservation;
+
+            try
+            {
+                if (view.IsEdit)
+                {
+                    repository.edit(payMode);
+                    view.Message = "PayMode edited Successfuly";
+
+                }
+                else
+
+                {
+                    repository.Add(payMode);
+                    view.Message = "PayMode added successfuly";
+
+                }
+            }
+            catch (Exception ex) 
+            {
+            //Si ocurre una excepcion se configura IsSuccessfull en false
+            //y a la propiedad Message de la vista se asigna el mensaje de la exception 
+            view.IsSuccessful = false;
+                view.Message = ex.Message;
+            }
         }
 
         private void DeleteSelectedPayMode(object? sender, EventArgs e)
@@ -59,12 +88,22 @@ namespace Supermarket_mvp.Presenters
 
         private void LoadSelectPayModeToEdit(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            //se obtiene el objeto del datagridview que se encuentra Seleccionado 
+            var payMode = (PayModeModel)payModeBindingSource.Current;
+
+            //Se cambia el contenido  de las cajas de texto  por el objeto recuperado 
+            //del datagridview 
+            view.PayModeId = payMode.Id.ToString();
+            view.PayModeName = payMode.Name;
+            view.PayModeObservation= payMode.Observation;
+
+            //Se estable el modo como edicion 
+            view.IsEdit = true; 
         }
 
         private void AddNewPayMode(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            view.IsEdit = false;
         }
 
         private void SearchPayMode(object? sender, EventArgs e)

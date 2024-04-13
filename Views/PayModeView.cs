@@ -30,7 +30,7 @@ namespace Supermarket_mvp.Views
 
         private void AssociateAndRaiseViewEvents()
         {
-            BtnSearch.Click += delegate { SearchEvent?.Invoke(this,EventArgs.Empty); };
+            BtnSearch.Click += delegate { SearchEvent?.Invoke(this, EventArgs.Empty); };
 
             TxtSearch.KeyDown += (s, e) =>
             {
@@ -39,8 +39,51 @@ namespace Supermarket_mvp.Views
                     SearchEvent?.Invoke(this, EventArgs.Empty);
                 }
             };
-        
-        }
+            // Agregar, llame el evento addNewEvent Cuando se haga clic en el boton BtNew
+            BtnNew.Click += delegate { 
+                AddNewEvent?.Invoke(this, EventArgs.Empty);
+
+                tabControl1.TabPages.Remove(tabPagePayModeList);
+                tabControl1.TabPages.Add(tabPagePayModeDetail);
+                tabPagePayModeDetail.Text = "Add New Pay Mode";//Cambia el titulos de la pestaña
+            };
+            BtnEdit.Click += delegate { 
+                EditEvent?.Invoke(this, EventArgs.Empty);
+               
+                tabControl1.TabPages.Remove(tabPagePayModeList);
+                tabControl1.TabPages.Add(tabPagePayModeDetail);
+                tabPagePayModeDetail.Text = "Edit Pay Mode";//Cambia el titulos de la pestaña
+            };
+            BtnSave.Click += delegate { 
+                SaveEvent?.Invoke(this, EventArgs.Empty);
+
+                if (isSuccessful)//Si grabar fue exitosa
+                {
+                    tabControl1.TabPages.Remove(tabPagePayModeDetail);
+                    tabControl1.TabPages.Add(tabPagePayModeList);
+                }
+                MessageBox.Show(Message);
+            };
+           
+            BtnCancel.Click += delegate {  
+                CancelEvent?.Invoke(this, EventArgs.Empty);
+                tabControl1.TabPages.Remove(tabPagePayModeDetail);
+                tabControl1.TabPages.Add(tabPagePayModeList);
+
+            };
+            BtnDelete.Click += delegate
+            {
+                var result = MessageBox.Show("Are you sure you want to delete the selected Pay Mode", "Warning",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    DeleteEvent?.Invoke(this, EventArgs.Empty);
+                    MessageBox.Show(Message);
+                }
+            };
+
+            }
 
         public string PayModeId 
         {
