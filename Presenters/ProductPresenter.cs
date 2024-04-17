@@ -44,28 +44,90 @@ namespace Supermarket_mvp.Presenters
 
         private void CancelAction(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+           CleanViewFields();
         }
 
 
         private void SaveProduct(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+
+            var product = new ProductModel();
+            product.Id = Convert.ToInt32(view.ProductId);
+            product.Name = view.ProductName;
+            product.Observation = view.ProductObservation;
+
+            try
+            {
+                new Common.ModelDataValidation().Validate(product);
+                if (view.IsEdit)
+                {
+                    repository.edit(product);
+                    view.Message = "Product edited Successfuly";
+
+                }
+                else
+
+                {
+                    repository.Add(product);
+                    view.Message = "Product added successfuly";
+
+                }
+                view.IsSuccessful = true;
+                LoadAllProductList();
+                CleanViewFields();
+            }
+            catch (Exception ex)
+            {
+
+                view.IsSuccessful = false;
+                view.Message = ex.Message;
+            }
+        }
+
+        private void CleanViewFields()
+        {
+            view.ProductId = "0";
+            view.ProductName = "";
+            view.ProductObservation = "";
         }
 
         private void DeleteSelectedProduct(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+               
+                var productModel = (ProductModel)productBindingSource.Current;
+
+                
+                repository.Delete(productModel.Id);
+                view.IsSuccessful = true;
+                view.Message = "product deleted successfully";
+                LoadAllProductList();
+            }
+            catch (Exception ex)
+            {
+                view.IsSuccessful = false;
+                view.Message = "An error ocurred, could not delete product";
+            }
         }
 
         private void LoadSelectProductToEdit(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            
+            var product = (ProductModel)productBindingSource.Current;
+
+            
+            view.ProductId = product.Id.ToString();
+            view.ProductName = product.Name;
+            view.ProductObservation = product.Observation;
+
+           
+            view.IsEdit = true;
         }
 
         private void AddNewProduct(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            view.IsEdit = false;
         }
 
         private void SearchProduct(object? sender, EventArgs e)
