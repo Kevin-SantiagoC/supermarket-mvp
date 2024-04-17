@@ -22,6 +22,8 @@ namespace Supermarket_mvp.Views
             AssociateAndRaiseViewEvents();
 
             tabControl1.TabPages.Remove(tabPageProductDetail);
+
+            BtnClose.Click += delegate { this.Close(); };
         }
 
         private void AssociateAndRaiseViewEvents()
@@ -106,5 +108,7 @@ namespace Supermarket_mvp.Views
             }
             return instance;
         }
+
+        
     }
 }
