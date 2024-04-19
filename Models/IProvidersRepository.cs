@@ -13,6 +13,6 @@ namespace Supermarket_mvp.Models
         void Delete(int id);
         IEnumerable<ProvidersModel> GetAll();
         IEnumerable<ProvidersModel> GetAll(string value);
-
+        IEnumerable<ProvidersModel> GetByValue(string searchValue);
     }
 }

@@ -101,7 +101,7 @@ namespace Supermarket_mvp._Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = @"SELECT * FROM PayMode
+                command.CommandText = @"SELECT * FROM Product
                                      WHERE Product_Id=@id or Product_Name LIKE @name+ '%'
                                      ORDER By Product_Id DESC";
                 command.Parameters.Add("@id", SqlDbType.Int).Value = productId;
@@ -111,9 +111,9 @@ namespace Supermarket_mvp._Repositories
                     while (reader.Read())
                     {
                         var productModel = new ProductModel();
-                        productModel.Id = (int)reader["Pay_Mode_Id"];
-                        productModel.Name = reader["Pay_Mode_Name"].ToString();
-                        productModel.Observation = reader["Pay_Mode_Observation"].ToString();
+                        productModel.Id = (int)reader["Product_Id"];
+                        productModel.Name = reader["Product_Name"].ToString();
+                        productModel.Observation = reader["Product_Observation"].ToString();
                         productList.Add(productModel);
 
                     }
