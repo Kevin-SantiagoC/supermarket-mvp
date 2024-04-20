@@ -35,6 +35,15 @@ namespace Supermarket_mvp
             IProductRepository repository = new ProductRepository(sqlConnectionString);
             new ProductPresenter(view, repository);
             Application.Run((Form)view);*/
+
+
+            /*ApplicationConfiguration.Initialize();
+            string sqlConnectionString = Settings.Default.SqlConnection;
+            IProvidersView view = new ProvidersView();
+            IProvidersRepository repository = new ProvidersRepository(sqlConnectionString);
+            new ProvidersPresenter(view, repository);
+            Application.Run((Form)view); */
+
         }
     }
 }

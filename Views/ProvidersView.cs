@@ -12,7 +12,7 @@ namespace Supermarket_mvp.Views
 {
     public partial class ProvidersView : Form, IProvidersView
     {
-        
+
         private bool isEdit;
         private bool isSuccesful;
         private string message;
@@ -23,6 +23,8 @@ namespace Supermarket_mvp.Views
             AssociateAndRaiseViewEvents();
 
             tabControl1.TabPages.Remove(tabPageProvidersDetail);
+
+            BtnClose.Click += delegate { this.Close(); };
         }
 
         private void AssociateAndRaiseViewEvents()
@@ -36,21 +38,87 @@ namespace Supermarket_mvp.Views
                     SearchEvent?.Invoke(this, EventArgs.Empty);
                 }
             };
+
+            BtnNew.Click += delegate { 
+                AddNewEvent?.Invoke(this, EventArgs.Empty);
+
+                tabControl1.TabPages.Remove(tabPageProvidersList);
+                tabControl1.TabPages.Add(tabPageProvidersDetail);
+                tabPageProvidersDetail.Text = "Add New Provider";
+
+
+            };
+            BtnEdit.Click += delegate { 
+                EditEvent?.Invoke(this, EventArgs.Empty);
+                
+                
+                tabControl1.TabPages.Remove(tabPageProvidersList);
+                tabControl1.TabPages.Add(tabPageProvidersDetail);
+                tabPageProvidersDetail.Text = "Edit Provider";
+
+
+            };
+            BtnDelete.Click += delegate { 
+                DeleteEvent?.Invoke(this, EventArgs.Empty);
+
+                
+                var result = MessageBox.Show(
+            "Are you sure you want to delete the selected Provider",
+            "Warning",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    DeleteEvent?.Invoke(this, EventArgs.Empty);
+                    MessageBox.Show(message);
+                }
+
+
+            };
+            BtnSave.Click += delegate { 
+                SaveEvent?.Invoke(this, EventArgs.Empty);
+
+                if (isSuccesful)
+                {
+                    tabControl1.TabPages.Remove(tabPageProvidersDetail);
+                    tabControl1.TabPages.Add(tabPageProvidersList);
+                }
+                MessageBox.Show(message);
+
+
+            };
+            BtnCancel.Click += delegate { 
+                CancelEvent?.Invoke(this, EventArgs.Empty);
+
+                tabControl1.TabPages.Remove(tabPageProvidersDetail);
+                tabControl1.TabPages.Add(tabPageProvidersList);
+
+
+            };
+                
+
+
+
+
             }
 
-        public string ProviderId 
+
+
+
+
+        public string ProviderId
         {
             get { return TxtProvidersId.Text; }
             set { TxtProvidersId.Text = value; }
 
         }
-        public string ProviderName 
+        public string ProviderName
         {
             get { return TxtProvidersName.Text; }
             set { TxtProvidersName.Text = value; }
 
         }
-        public string ProviderObservation 
+        public string ProviderObservation
         {
             get { return TxtProvidersObservation.Text; }
             set { TxtProvidersObservation.Text = value; }
@@ -62,20 +130,20 @@ namespace Supermarket_mvp.Views
             set { TxtSearch.Text = value; }
 
         }
-        public bool IsEdit 
+        public bool IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
 
         }
-        public bool IsSuccesful 
+        public bool IsSuccesful
         {
             get { return isSuccesful; }
             set { isSuccesful = value; }
 
 
         }
-        public string Menssage 
+        public string Menssage
         {
             get { return message; }
             set { message = value; }
@@ -91,6 +159,38 @@ namespace Supermarket_mvp.Views
         public void SetProvidersListBildingSource(BindingSource providersList)
         {
             DgProviders.DataSource = providersList;
+
+
         }
+
+        private static ProvidersView instance;
+            
+
+        public static ProvidersView GetInstance(Form parentContainer) 
+        {
+            if (instance == null || instance.IsDisposed)
+            {
+                instance = new ProvidersView();
+                instance.MdiParent = parentContainer;
+
+                instance.FormBorderStyle = FormBorderStyle.None;
+                instance.Dock = DockStyle.Fill;
+
+
+
+            }
+            else
+            {
+                if (instance.WindowState == FormWindowState.Minimized)
+                {
+                    instance.WindowState = FormWindowState.Normal;
+                }
+                instance.BringToFront();
+            }
+            return instance;
+        }
+
     }
 }
+
+
