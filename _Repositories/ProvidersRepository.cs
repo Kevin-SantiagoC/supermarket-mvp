@@ -39,7 +39,7 @@ namespace Supermarket_mvp._Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "DELETE FROM Providers WHERE Provider_Id = @id";
+                command.CommandText = "DELETE FROM Providers WHERE Providers_Id = @id";
                 command.Parameters.Add("@id", SqlDbType.Int).Value = id;
                 command.ExecuteNonQuery();
 
@@ -54,9 +54,9 @@ namespace Supermarket_mvp._Repositories
                 connection.Open();
                 command.Connection = connection;
                 command.CommandText = @"UPDATE Providers 
-                            SET Provider_Name = @name, 
-                            Provider_Observation = @observation 
-                            WHERE Provider_Id = @id";
+                            SET Providers_Name = @name, 
+                            Providers_Observation = @observation 
+                            WHERE Providers_Id = @id";
                 command.Parameters.Add("@name", SqlDbType.NVarChar).Value = providersModel.Name;
                 command.Parameters.Add("@observation", SqlDbType.NVarChar).Value = providersModel.Observation;
                 command.Parameters.Add("@id", SqlDbType.Int).Value = providersModel.Id;
@@ -105,8 +105,8 @@ namespace Supermarket_mvp._Repositories
                 connection.Open();
                 command.Connection = connection;
                 command.CommandText = @"SELECT * FROM Providers 
-                                    WHERE Provider_Id=@id or Provider_Name LIKE @name+ '%'
-                                    ORDER BY Provider_Id DESC";
+                                    WHERE Providers_Id=@id or Provider_Name LIKE @name+ '%'
+                                    ORDER BY Providers_Id DESC";
                 command.Parameters.Add("@id", SqlDbType.Int).Value = providerId;
                 command.Parameters.Add("@name", SqlDbType.NVarChar).Value = providerName;
                 using (var reader = command.ExecuteReader())
@@ -114,9 +114,9 @@ namespace Supermarket_mvp._Repositories
                     while (reader.Read())
                     {
                         var providersModel = new ProvidersModel();
-                        providersModel.Id = (int)reader["Provider_Id"];
-                        providersModel.Name = reader["Provider_Name"].ToString();
-                        providersModel.Observation = reader["Provider_Observation"].ToString();
+                        providersModel.Id = (int)reader["Providers_Id"];
+                        providersModel.Name = reader["Providers_Name"].ToString();
+                        providersModel.Observation = reader["Providers_Observation"].ToString();
                         providersList.Add(providersModel);
                     }
                 }
