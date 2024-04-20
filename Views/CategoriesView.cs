@@ -23,6 +23,7 @@ namespace Supermarket_mvp.Views
             AssociateAndRaiseViewEvents();
 
             tabControl1.TabPages.Remove(tabPageCategoriesDetail);
+            BtnClose.Click += delegate { this.Close(); };
         }
 
         private void AssociateAndRaiseViewEvents()
@@ -34,6 +35,49 @@ namespace Supermarket_mvp.Views
                 if (e.KeyCode == Keys.Enter)
                 {
                     SearchEvent?.Invoke(this, EventArgs.Empty);
+                }
+            };
+
+            BtnNew.Click += delegate {
+                AddNewEvent?.Invoke(this, EventArgs.Empty);
+
+                tabControl1.TabPages.Remove(tabPageCategoriesList);
+                tabControl1.TabPages.Add(tabPageCategoriesDetail);
+                tabPageCategoriesDetail.Text = "Add New Categories";//Cambia el titulos de la pestaña
+            };
+            BtnEdit.Click += delegate {
+                EditEvent?.Invoke(this, EventArgs.Empty);
+
+                tabControl1.TabPages.Remove(tabPageCategoriesList);
+                tabControl1.TabPages.Add(tabPageCategoriesDetail);
+                tabPageCategoriesDetail.Text = "Edit Categories";//Cambia el titulos de la pestaña
+            };
+            BtnSave.Click += delegate {
+                SaveEvent?.Invoke(this, EventArgs.Empty);
+
+                if (isSuccessful)//Si grabar fue exitosa
+                {
+                    tabControl1.TabPages.Remove(tabPageCategoriesDetail);
+                    tabControl1.TabPages.Add(tabPageCategoriesList);
+                }
+                MessageBox.Show(Message);
+            };
+
+            BtnCancel.Click += delegate {
+                CancelEvent?.Invoke(this, EventArgs.Empty);
+                tabControl1.TabPages.Remove(tabPageCategoriesDetail);
+                tabControl1.TabPages.Add(tabPageCategoriesList);
+
+            };
+            BtnDelete.Click += delegate
+            {
+                var result = MessageBox.Show("Are you sure you want to delete the selected Categories", "Warning",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    DeleteEvent?.Invoke(this, EventArgs.Empty);
+                    MessageBox.Show(Message);
                 }
             };
         }
@@ -88,6 +132,30 @@ namespace Supermarket_mvp.Views
         public void SetCategoriesListBildingSource(BindingSource categoriesList)
         {
            DgCategories.DataSource = categoriesList;
+
+        }
+
+        private static CategoriesView instance;
+
+        public static CategoriesView GetInstance(Form parentContainer) 
+        {
+            if (instance == null || instance.IsDisposed)
+            {
+                instance = new CategoriesView();
+                instance.MdiParent = parentContainer;
+
+                instance.FormBorderStyle = FormBorderStyle.None;
+                instance.Dock = DockStyle.Fill;
+            }
+            else
+            {
+                if (instance.WindowState == FormWindowState.Minimized)
+                {
+                    instance.WindowState = FormWindowState.Normal;
+                }
+                instance.BringToFront();
+            }
+            return instance;
         }
 
        

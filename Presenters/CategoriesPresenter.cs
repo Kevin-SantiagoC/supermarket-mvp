@@ -43,27 +43,90 @@ namespace Supermarket_mvp.Presenters
 
         private void CancelAction(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            CleanViewFields();
         }
 
         private void SaveCategories(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var categories = new CategoriesModel();
+            categories.Id = Convert.ToInt32(view.CategoriesId);
+            categories.Name = view.CategoriesName;
+            categories.Observation = view.CategoriesObservation;
+
+            try
+            {
+                new Common.ModelDataValidation().Validate(categories);
+                if (view.IsEdit)
+                {
+                    repository.edit(categories);
+                    view.Message = "Categories edited Successfuly";
+
+                }
+                else
+
+                {
+                    repository.Add(categories);
+                    view.Message = "Categories added successfuly";
+
+                }
+                view.IsSuccessful = true;
+                loadAllCategoriesList();
+                CleanViewFields();
+            }
+            catch (Exception ex)
+            {
+                //Si ocurre una excepcion se configura IsSuccessfull en false
+                //y a la propiedad Message de la vista se asigna el mensaje de la exception 
+                view.IsSuccessful = false;
+                view.Message = ex.Message;
+            }
+        }
+
+        private void CleanViewFields()
+        {
+            view.CategoriesId = "0";
+            view.CategoriesName = "";
+            view.CategoriesObservation = "";
         }
 
         private void DeleteSelectedCategories(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+
+            try
+            {
+                //Se recupera el objeto de la fila seleccionada del dataviewgird
+                var categories = (CategoriesModel)categoriesBindingSource.Current;
+
+                //Se invoca el metodo Delete del repositorio pasandole el id del Pay Mode 
+                repository.Delete(categories.Id);
+                view.IsSuccessful = true;
+                view.Message = "Categories deleted successfully";
+                loadAllCategoriesList();
+            }
+            catch (Exception ex)
+            {
+                view.IsSuccessful = false;
+                view.Message = "An error ocurred, could not delete categories";
+            }
         }
 
         private void LoadSelectCategoriesToEdit(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var categories = (CategoriesModel)categoriesBindingSource.Current;
+
+            //Se cambia el contenido  de las cajas de texto  por el objeto recuperado 
+            //del datagridview 
+            view.CategoriesId = categories.Id.ToString();
+            view.CategoriesName = categories.Name;
+            view.CategoriesObservation = categories.Observation;
+
+            //Se estable el modo como edicion 
+            view.IsEdit = true;
         }
 
         private void AddNewCategories(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            view.IsEdit = false;
         }
 
         private void SearchCategories(object? sender, EventArgs e)
