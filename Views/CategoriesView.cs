@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -19,6 +20,22 @@ namespace Supermarket_mvp.Views
         public CategoriesView()
         {
             InitializeComponent();
+            AssociateAndRaiseViewEvents();
+
+            tabControl1.TabPages.Remove(tabPageCategoriesDetail);
+        }
+
+        private void AssociateAndRaiseViewEvents()
+        {
+            BtnSearch.Click += delegate { SearchEvent?.Invoke(this, EventArgs.Empty); };
+
+            TxtSearch.KeyDown += (s, e) =>
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    SearchEvent?.Invoke(this, EventArgs.Empty);
+                }
+            };
         }
 
         public string CategoriesId 
@@ -72,5 +89,7 @@ namespace Supermarket_mvp.Views
         {
            DgCategories.DataSource = categoriesList;
         }
+
+       
     }
 }

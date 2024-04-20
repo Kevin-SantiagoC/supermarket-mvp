@@ -8,10 +8,10 @@ namespace Supermarket_mvp.Models
 {
     internal interface ICategoriesRepository
     {
-        void Add(ProductModel productModel);
-        void edit(ProductModel productModel);
+        void Add(CategoriesModel categoriesModel);
+        void edit(CategoriesModel categoriesModel);
         void Delete(int id);
-        IEnumerable<ProductModel> GetAll();
-        IEnumerable<ProductModel> GetByValue(string value);
+        IEnumerable<CategoriesModel> GetAll();
+        IEnumerable<CategoriesModel> GetByValue(string value);
     }
 }
